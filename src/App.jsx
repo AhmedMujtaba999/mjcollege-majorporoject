@@ -1,4 +1,4 @@
-import Card from './components/Card.jsx'
+import Menu from './components/Menu.jsx'
 
 import './App.css'
 
@@ -7,42 +7,27 @@ import './App.css'
 
 function App() {
 
-  const features = {
-    feature1: {
-      highlight: '30%',
-      text: 'increase in perfromance'
-    },
-    feature2: {
-      highlight: '20%',
-      text: 'increase in accuracy'
-    },
-    feature3: {
-      highlight: '10%',
-      text: 'increase in efficiency'
-    }
-  }
+
 
 
   return (
     <div className="min-h-screen bg-black " >
 
-      <div>
-        <img src='src/assets/background.png'></img>
+      <Menu />
+
+
+
+      <div className="relative inline-block">
+        <img src="src/assets/background.png" alt="Description of image" className="block" />
+        <button className="absolute bottom-10 right-2 bg-white text-black font-bold py-2 px-4 w-40 h-12 rounded-r-3xl rounded-l-3xl">
+          Click Me1
+        </button>
       </div>
 
-
-      <div className="container mx-auto p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-20">
-          <Card feature={features.feature1} className="p-3"></Card>
-          <Card feature={features.feature2} className="p-3"></Card>
-          <Card feature={features.feature3} className="p-3"></Card>
-
-
-        </div>
-      </div>
 
 
     </div>
+
 
   )
 }
