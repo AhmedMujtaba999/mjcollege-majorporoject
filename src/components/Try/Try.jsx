@@ -57,7 +57,7 @@ function Try() {
                 <input id="file-upload" type="file" onChange={handleFileChange} className="hidden" />
                 {preview && (
                     <div>
-                        <img src={preview} alt="Preview" className="mt-4" style={{ width: '200px' }} />
+                        <img src={preview} alt="Preview" className="mt-4" style={{ width: '300px' }} />
                     </div>
                 )}
                 <button type="submit" className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Upload</button>
