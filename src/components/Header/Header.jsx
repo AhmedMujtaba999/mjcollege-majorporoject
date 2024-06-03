@@ -4,7 +4,7 @@ function Header() {
     return (
         <nav className="fixed w-full z-10 top-0 bg-transparent hover:bg-gray-900 transition duration-300">
             <div className="container mx-auto px-4 py-2 flex items-center">
-                <a href="#" className="pr-14 text-white text-2xl font-bold">Brand</a>
+                <a href="#" className="pr-14 text-white text-2xl font-bold">Visual fusion</a>
                 <div className='px-14 '></div>
                 <div className='px-14 '></div>
                 <div className='px-14 '></div>
