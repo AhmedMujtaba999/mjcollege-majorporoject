@@ -18,38 +18,41 @@ function Try() {
         reader.readAsDataURL(selectedFile);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!file) {
             alert("Please select a file first!");
             return;
         }
 
-        // Implement your upload logic here
-        // For example, you can use FormData to send the file to your server
-        const formData = new FormData();
-        formData.append('image', file);
+        try {
+            // Implement your upload logic here
+            // For example, you can use FormData to send the file to your server
+            const formData = new FormData();
+            formData.append('image', file);
 
-        // Replace the URL with your upload endpoint
-        axios.post('https://c7fd-35-221-220-244.ngrok-free.app/predict', formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('File uploxaded successfully:', data);
-                const { caption } = data
-                caption.pop()
-                set(caption.join(" "))
+            // Replace the URL with your upload endpoint
+            const repsonse = await axios.post('https://ecf9-35-187-247-252.ngrok-free.app/predict', formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
             })
-            .catch(error => {
-                console.error('Error uploading file:', error);
-            });
+
+            const { caption } = repsonse.data
+            const idx = caption.indexOf("<unk>")
+            if (idx !== -1) {
+                caption.splice(idx, 1)
+            }
+            caption.pop()
+            set(caption.join(" "))
+        }
+        catch (error) {
+            console.error('Error occured', error);
+        }
     };
 
     return (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex items-center justify-center h-screen flex-col">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="file-upload" className="cursor-pointer">
                     <img src="src/assets/upload.jpeg" alt="Upload" className="w-20 h-20" />
@@ -60,9 +63,9 @@ function Try() {
                         <img src={preview} alt="Preview" className="mt-4" style={{ width: '300px' }} />
                     </div>
                 )}
-                <button type="submit" className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Upload</button>
+                <button type="submit" className="mt-4 mb-5 bg-blue-500 text-white px-4 py-2 rounded">Upload</button>
             </form>
-            {captionn && <h1>Generated Caption: {captionn}</h1>}
+            {captionn && <h1 className='text-white'>Generated Caption: {captionn}</h1>}
         </div>
     );
 }
